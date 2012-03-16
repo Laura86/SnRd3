@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Force-Directed Layout</title>
+    <script type="text/javascript" src="d3/d3.js"></script>
+    <script type="text/javascript" src="d3/d3.geom.js"></script>
+    <script type="text/javascript" src="d3/d3.layout.js"></script>
+    <link type="text/css" rel="stylesheet" href="force.css"/>
+	<link type="text/css" rel="stylesheet" href="brewer.css"/>
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script type="text/javascript" src="force.js"></script>
+    <div id="footer">
+        Social Network Example
+        <div class="hint1">use this menu to change nodes diameter </div>
+        <div><select id="diameter">
+          <optgroup label="Nodes Diameter">
+            <option value=3> Extra Small </option>
+            <option value=4> Small </option>
+            <option value=6 selected > Medium </option>
+            <option value=7> Large </option>
+            <option value=9> Extra Large </option>            
+          </optgroup>
+        </select></div>
+
+		<div class="hint2">use this menu to show </div>
+        <div><select id="links_value">
+          <optgroup label="Links Value">
+            <option value=1 selected> all links </option>
+            <option value=0> no links </option>                                    
+          </optgroup>
+        </select></div>
+
+		<div class="hint3">use the menu to change the color scale</div>
+        <div><select id="colors">
+          <optgroup label="Colors by Cynthia Brewer.">
+            <option value="YlGn" selected>YlGn</option>
+            <option value="YlGnBu">YlGnBu</option>
+            <option value="GnBu">GnBu</option>
+            <option value="BuGn">BuGn</option>
+            <option value="PuBuGn">PuBuGn</option>
+            <option value="PuBu">PuBu</option>
+            <option value="BuPu">BuPu</option>
+            <option value="RdPu">RdPu</option>
+            <option value="PuRd">PuRd</option>
+            <option value="OrRd">OrRd</option>
+            <option value="YlOrRd">YlOrRd</option>
+            <option value="YlOrBr">YlOrBr</option>
+            <option value="Purples">Purples</option>
+            <option value="Blues">Blues</option>
+            <option value="Greens">Greens</option>
+            <option value="Oranges">Oranges</option>
+            <option value="Reds">Reds</option>
+            <option value="Greys">Greys</option>
+          </optgroup>
+        </select></div>
+
+		<div class="hint4">use this menu to change nodes color </div>
+        <div><select id="centrality">
+          <optgroup label="Centrality">
+            <option value=1> according to betweenness centrality </option>
+            <option value=2 selected> according to Eigen-vector centrality </option> 
+			<option value=3> according to Pagerank </option>                                   
+          </optgroup>
+        </select></div>
+
+        <script type="text/javascript">
+    	d3.select("#diameter").on("change", function() {
+  		vis.selectAll("circle.node").attr("r", this.value);
+		console.log("cambio diametro");
+		});
+
+        d3.select("#links_value").on("change", function() {
+			var s = this.value;
+            switch(s) { 
+			case "0": vis.selectAll("line.link").style("stroke-width", function() {return 0; }); console.log("dentro case 0"); break;
+			case "1": 
+			default: vis.selectAll("line.link").style("stroke-width", function() {return 1; }); console.log("dentro default"); break;
+			}
+         });
+
+		d3.select("#centrality").on("change", function() {
+			var s = this.value;
+            switch(s) { 
+			case "1": vis.selectAll("circle.node").attr("class", function (d) { 
+					  return "q" + Math.min(8,Math.floor((d.betweenness) * 80)) + "-9";}); break;
+			case "2": vis.selectAll("circle.node").attr("class", function (d) {
+					  return "q" + Math.min(8,Math.floor((d.eigenvector_centrality) * 80)) + "-9";}); break;
+			case "3": vis.selectAll("circle.node").attr("class", function (d) {
+					  return "q" + Math.min(8,Math.floor((d.pagerank) * 80)) + "-9";}); break;
+			}
+          });
+		
+		d3.select("#colors").on("change", function() {
+  			d3.selectAll("svg").attr("class", this.value);
+		});
+
+		</script>
+    </div>
+  </body>
+</html>
