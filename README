@@ -1,1 +1,2 @@
-README TO DO
+To run the server (from its directory): node server.js 
+Then go to "http://localhost:8000" from your web browser
