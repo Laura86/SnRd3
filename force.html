@@ -68,15 +68,14 @@
         <script type="text/javascript">
     	d3.select("#diameter").on("change", function() {
   		vis.selectAll("circle.node").attr("r", this.value);
-		console.log("cambio diametro");
 		});
 
         d3.select("#links_value").on("change", function() {
 			var s = this.value;
             switch(s) { 
-			case "0": vis.selectAll("line.link").style("stroke-width", function() {return 0; }); console.log("dentro case 0"); break;
+			case "0": vis.selectAll("line.link").style("stroke-width", function() {return 0; }); break;
 			case "1": 
-			default: vis.selectAll("line.link").style("stroke-width", function() {return 1; }); console.log("dentro default"); break;
+			default: vis.selectAll("line.link").style("stroke-width", function() {return 1; }); break;
 			}
          });
 
@@ -84,11 +83,11 @@
 			var s = this.value;
             switch(s) { 
 			case "1": vis.selectAll("circle.node").attr("class", function (d) { 
-					  return "q" + Math.min(8,Math.floor((d.betweenness) * 80)) + "-9";}); break;
+					  return "node"+" "+"q" + Math.min(8,Math.floor((d.betweenness) * 500)) + "-9";}); break;
 			case "2": vis.selectAll("circle.node").attr("class", function (d) {
-					  return "q" + Math.min(8,Math.floor((d.eigenvector_centrality) * 80)) + "-9";}); break;
+					  return "node"+" "+"q" + Math.min(8,Math.floor((d.eigenvector_centrality) * 80)) + "-9";}); break;
 			case "3": vis.selectAll("circle.node").attr("class", function (d) {
-					  return "q" + Math.min(8,Math.floor((d.pagerank) * 80)) + "-9";}); break;
+					  return "node"+" "+"q" + Math.min(8,Math.floor((d.pagerank) * 500)) + "-9";}); break;
 			}
           });
 		

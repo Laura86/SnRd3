@@ -1,5 +1,5 @@
 var w = 800,
-    h = 800;
+    h = 600;
    
 
 var vis = d3.select("#chart") //Seleziona "#chart" dal documento (D3 usa CSS3 per la select).
@@ -7,7 +7,7 @@ var vis = d3.select("#chart") //Seleziona "#chart" dal documento (D3 usa CSS3 pe
                      //una nuova selection con aggiunti gli elementi in append.
     .attr("width", w)   //Attributi altezza e larghezza che si applicano alle select
     .attr("height", h) //appena effettuate.
-	.attr("class", "YlGn");
+	.attr("class", "YlGn"); //Attributo per la classe di colori.
 
 d3.json("network.json", function(json) { //*** inizio funzione json ***//
 		                            //Attua una request HTTP GET sul file json all'url
@@ -74,9 +74,9 @@ d3.json("network.json", function(json) { //*** inizio funzione json ***//
       .attr("cy", function(d) { return d.y; }) //attributo ordinata del nodo
       .attr("r", 6); //Imposta il raggio dei cerchi che rappresentano i nodi (come attributo).
 
-	  node.attr("class", function(d) {return "q" + Math.min(8,Math.floor((d.eigenvector_centrality) * 80)) + "-9";}); 
+	  node.attr("class", function(d) {return "node"+" "+"q" + Math.min(8,Math.floor((d.eigenvector_centrality) * 80)) + "-9";})
                                       //Cambio il colore dei nodi in funzione dell'eigenvector centrality.
-      
+
       node.call(force.drag); //Chiama la funzione drag del layout force directed. La funzione drag permette
                          //di associare un comportamento ai nodi, ad esempio il cambio della posizione 
                          //quando si clicca con il mouse e/o si trascina un nodo.
