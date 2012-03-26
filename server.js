@@ -1,6 +1,6 @@
 // NodeJS HTTP server che fornisce file dalla directory in cui risiede
 // per attivare il server in node:  node server.js
-// http://localhost:8000 or http://127.0.0.1:8000
+// http://localhost:8000/index.html or http://127.0.0.1:8000/index.html
 
 
 // moduli  che servono per costruire un server

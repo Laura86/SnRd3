@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Force-Directed Layout</title>
+    <title>Social Network Representation with Force-Directed Layout</title>
     <script type="text/javascript" src="d3/d3.js"></script>
     <script type="text/javascript" src="d3/d3.geom.js"></script>
     <script type="text/javascript" src="d3/d3.layout.js"></script>
@@ -58,18 +58,41 @@
 
 		<div class="hint4">use this menu to change nodes color </div>
         <div><select id="centrality">
-          <optgroup label="Centrality">
-            <option value=1> according to betweenness centrality </option>
-            <option value=2 selected> according to Eigen-vector centrality </option> 
-			<option value=3> according to Pagerank </option>                                   
-          </optgroup>
+            <script type="text/javascript">
+				//carico la select a seconda delle metriche presenti nel json
+				var mygetrequest=new XMLHttpRequest()
+				mygetrequest.onreadystatechange=function(){
+ 				if (mygetrequest.readyState==4){
+  					if (mygetrequest.status==200 || window.location.href.indexOf("http")==-1){
+   					var jsondata=eval("("+mygetrequest.responseText+")") //retrieve result as JavaScript object
+   					var snmetrics=jsondata.metrics
+   					var output='<optgroup label="Centrality">'
+   					for (var i=0; i<snmetrics.length; i++){
+    				output+='<option value='+(i+1)+'> according to'
+    				output+=' '+snmetrics[i].name+'</option>'
+   					}
+   					output+='</optgroup>'
+   					document.getElementById("centrality").innerHTML=output
+   					//console.log(output);
+  					}
+  					else{
+   					alert("An error has occured making the request")
+  					}
+ 				 }
+  				}
+				mygetrequest.open("GET", "network.json", true)
+				mygetrequest.send(null)
+			</script>                             
         </select></div>
 
         <script type="text/javascript">
+
+		//gestisce il cambio diametro
     	d3.select("#diameter").on("change", function() {
   		vis.selectAll("circle.node").attr("r", this.value);
 		});
 
+		//gestisce links
         d3.select("#links_value").on("change", function() {
 			var s = this.value;
             switch(s) { 
@@ -79,6 +102,7 @@
 			}
          });
 
+        //gestisce il cambio colori in base alle metriche
 		d3.select("#centrality").on("change", function() {
 			var s = this.value;
             switch(s) { 
@@ -91,6 +115,7 @@
 			}
           });
 		
+		//gestisce le classi di colori
 		d3.select("#colors").on("change", function() {
   			d3.selectAll("svg").attr("class", this.value);
 		});

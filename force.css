@@ -4,10 +4,21 @@ body {
   font-family: "Helvetica Neue", Helvetica;
 }
 
-#chart, #footer {
+#chart, #footer, #title, #form {
   position: absolute;
   top: 0;
 }
+
+#title {
+  top: 30px;
+  text-align: center;
+  font-size: 30px;
+  text-shadow: 0 1px 0 #fff;
+}
+
+#form {
+  top: 100px;
+  }
 
 #footer {
   z-index: 1;

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Social Network Representation with D3</title>
+    <script type="text/javascript" src="d3/d3.js"></script>
+    <script type="text/javascript" src="d3/d3.geom.js"></script>
+    <script type="text/javascript" src="d3/d3.layout.js"></script>
+    <link type="text/css" rel="stylesheet" href="force.css"/>
+	<link type="text/css" rel="stylesheet" href="brewer.css"/>
+  </head>
+  <body>
+    <div id="title">
+        Social Network Representation using D3
+	 </div>
+     <div id="form">
+        <form method="post" action="force.html">
+		<fieldset>
+		<legend>Create a network</legend>
+        <br/><br/>
+		Type the number of nodes (max 200): <input type="text" name="n_nodes" value="100" maxlength="3"><br/> <br/>
+		Include:<br/>
+		<input name="bc" type="checkbox" checked> betweennes centrality<br/>
+        <input name="ec" type="checkbox" checked> eigen vector centrality<br/>
+        <input name="pr" type="checkbox" checked> page rank<br/> <br/>
+		<input type="submit" align="center" value="Start">
+		</fieldset>
+		</form>
+	 </div>
+  </body>
+</html>	

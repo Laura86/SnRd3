@@ -1,2 +1,2 @@
 To run the server (from its directory): node server.js 
-Then go to "http://localhost:8000" from your web browser
+Then go to "http://localhost:8000/index.html" from your web browser
